@@ -9,8 +9,8 @@ export default function AddEditScreen({ route, navigation }) {
 
     const person = route.params?.person;
 
-    const [firstName, setFirstName] = useState(person?.firstName || '');
-    const [lastName, setLastName] = useState(person?.lastName || '');
+    const [firstName, setFirstName] = useState(person?.firstname || '');
+    const [lastName, setLastName] = useState(person?.lastname || '');
     const [email, setEmail] = useState(person?.email || '');
 
     async function save() {
