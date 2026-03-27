@@ -1,13 +1,15 @@
-import { Button } from "react-native";
+import { View, Text, Button } from "react-native";
+import { styles } from "../styles/styles";
+import { deletePerson } from "../servers/peopleCrud";
 
-function CardPersonal({ item, navigation, refresh }) {
+export function CardPersonal({ item, navigation, refresh }) {
 
     return (
         <View style={styles.card}>
 
             <View>
                 <Text style={styles.name}>
-                    {item.name} {item.lastName}
+                    {item.firstname || item.firstName} {item.lastname || item.lastName}
                 </Text>
 
                 <Text style={styles.email}>

@@ -3,52 +3,52 @@ import { API_URL } from "./configApi";
 //Todas as funções usam fetch para consumir a API.  
 
 //Função para buscar todas as pessoas
+async function assertJsonResponse(response) {
+    const text = await response.text();
+    if (!response.ok) {
+        throw new Error(`API error ${response.status}: ${text}`);
+    }
+    try {
+        return JSON.parse(text);
+    } catch (err) {
+        throw new Error(`JSON parse error from API (${response.url}): ${err.message} / body: ${text}`);
+    }
+}
+
 export async function getPeople() {
-
-    //Realiza a requisão GET
     const response = await fetch(`${API_URL}/people`);
-
-    //Converte a resposta para JSON
-    const data = await response.json();
-
-    //Retorna a lista 
-    return data;
+    return assertJsonResponse(response);
 }
 
 //Função para criar uma nova pessoa
 export async function createPerson(person) {
-
     const response = await fetch(`${API_URL}/people`, {
-        method: 'POST', // método HTTP
-        headers: {
-            "Content-Type": "application/json" // tipo de conteúdo
-        },
-        body: JSON.stringify(person) // transforma o objeto em JSON
-    });
-
-    return response.json(); 
-
-}
-
-//Função para atualizar uma pessoa existente
-export async function updatePerson(id, person) {
-
-    const response = await fetch(`${API_URL}/people/${id}`, {
-        method: 'PUT', 
+        method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(person)
     });
-
-    return response.json();
-
+    return assertJsonResponse(response);
 }
 
-//Função para deletar uma pessoa
-export async function deletePerson(id) {
+export async function updatePerson(id, person) {
+    const response = await fetch(`${API_URL}/people/${id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(person)
+    });
+    return assertJsonResponse(response);
+}
 
-    await fetch(`${API_URL}/people/${id}`, {
+export async function deletePerson(id) {
+    const response = await fetch(`${API_URL}/people/${id}`, {
         method: 'DELETE'
     });
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`API DELETE error ${response.status}: ${text}`);
+    }
 }

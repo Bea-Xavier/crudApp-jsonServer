@@ -1,2 +1,2 @@
-// URL gerada pelo localTunnel, para acessar a API do JSON Server
-export const API_URL = 'https://crazy-cobras-sip.loca.lt';
+// URL gerada pelo localTunnel, para acessar a API do JSON Server, é alterada a cada execução
+export const API_URL = 'https://curvy-roses-smash.loca.lt';

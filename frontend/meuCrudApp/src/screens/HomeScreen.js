@@ -1,6 +1,7 @@
 import { FlatList, Text, Button, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { CardPersonal } from '../components/CardPersonal';
 
 import { styles } from '../styles/styles';
 
@@ -29,14 +30,13 @@ export default function HomeScreen({ }) {
 
             <Button
                 title="Adicionar Pessoa"
-                onPress={() => navigation.navite("AddEdit")}
+                onPress={() => navigation.navigate("AddEditScreen")}
             />
 
             <FlatList
                 data={people}
                 keyExtractor={(item) => item.id.toString()}
-
-                renderItem={(item) => (
+                renderItem={({ item }) => (
                     <CardPersonal
                         item={item}
                         navigation={navigation}
