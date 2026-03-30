@@ -15,6 +15,10 @@ export function CardPersonal({ item, navigation, refresh }) {
                 <Text style={styles.email}>
                     {item.email}
                 </Text>
+
+                <Text style={styles.email}>
+                    {item.phone}
+                </Text>
             </View>
 
             <View>
@@ -30,7 +34,7 @@ export function CardPersonal({ item, navigation, refresh }) {
                         refresh();
                     }}
                 />
-                
+
             </View>
 
         </View>
