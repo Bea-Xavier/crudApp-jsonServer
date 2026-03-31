@@ -17,8 +17,8 @@ export default function AddEditScreen({ route, navigation }) {
     async function save() {
 
         const data = {
-            firstName,
-            lastName,
+            firstname: firstName, 
+            lastname: lastName,
             email,
             phone
         };
@@ -65,6 +65,6 @@ export default function AddEditScreen({ route, navigation }) {
                 onPress={() => navigation.goBack()}
             />
         </View>
-        
+
     );
 }

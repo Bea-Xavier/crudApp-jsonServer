@@ -9,7 +9,7 @@ export function CardPersonal({ item, navigation, refresh }) {
 
             <View>
                 <Text style={styles.name}>
-                    {item.firstname || item.firstName} {item.lastname || item.lastName}
+                    {item.firstname} {item.lastname}
                 </Text>
 
                 <Text style={styles.email}>
