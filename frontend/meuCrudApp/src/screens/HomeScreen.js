@@ -40,11 +40,22 @@ export default function HomeScreen({ }) {
         }
     }
 
-    //Executa ao abrir a tela
+    //Executa ao abrir a tela, carrega tudo na primeira renderização
     useEffect(() => {
         loadPeople();
         filterPeople();
     }, []);
+
+     // Busca quando o texto muda (com debounce simples, ou seja com um tempo de inatividade)
+    useEffect(() => {
+        // Aguarda 500ms após o usuário parar de digitar para executar a função de busca
+        const delaySearch = setTimeout(() => {
+            filterPeople(searchText);
+        }, 500);
+
+        // Limpa o timeout anterior se o usuário continuar digitando
+        return () => clearTimeout(delaySearch);
+    }, [searchText]);
 
     return (
         <View style={styles.container}>
