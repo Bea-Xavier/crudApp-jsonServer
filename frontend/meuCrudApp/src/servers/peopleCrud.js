@@ -22,18 +22,12 @@ export async function getPeople() {
 
 //Função para criar uma nova pessoa
 export async function createPerson(person) {
-    const people = await getPeople();
-    /*Tentaiva de fazer um id incremental*/
-    const nextId = people.length > 0
-        ? Math.max(...people.map(p => Number(p.id))) + 1
-        : 1;
-
     const response = await fetch(`${API_URL}/people`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ ...person, id: String(nextId) })
+        body: JSON.stringify(person)
     });
     return assertJsonResponse(response);
 }
