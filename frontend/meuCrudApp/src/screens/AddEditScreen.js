@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { View, TextInput, Button } from "react-native";
+import { View, TextInput, TouchableOpacity } from "react-native";
+import { Save, X } from 'lucide-react-native';
 
 import { styles } from "../styles/styles";
 
@@ -17,7 +18,7 @@ export default function AddEditScreen({ route, navigation }) {
     async function save() {
 
         const data = {
-            firstname: firstName, 
+            firstname: firstName,
             lastname: lastName,
             email,
             phone
@@ -56,14 +57,17 @@ export default function AddEditScreen({ route, navigation }) {
                 value={phone}
                 onChangeText={setPhone}
             />
-            <Button
-                title="Salvar"
+            <TouchableOpacity
                 onPress={save}
-            />
-            <Button
-                title="Cancelar"
+            >
+                <Save size={20} color="#122072" />
+            </TouchableOpacity>
+
+            <TouchableOpacity
                 onPress={() => navigation.goBack()}
-            />
+            >
+                <X size={20} color="#d11a2a" />
+            </TouchableOpacity>
         </View>
 
     );
