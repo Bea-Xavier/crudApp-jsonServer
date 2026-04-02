@@ -1,4 +1,4 @@
-import { FlatList, Text, Button, View, ActivityIndicator } from 'react-native';
+import { FlatList, Text, Button, View, ActivityIndicator, TextInput } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { CardPersonal } from '../components/CardPersonal';
@@ -11,14 +11,23 @@ export default function HomeScreen({ }) {
     const navigation = useNavigation();
     //Lista
     const [people, setPeople] = useState([]);
+    //Tela de carregamento
     const [isLoading, setIsLoading] = useState(false);
+    //Pesquisa por nome
     const [searchText, setSearchText] = useState("");
 
     //Função para carregar os dados
     async function loadPeople() {
-        setIsLoading(true);
-        const data = await getPeople();
-        setPeople(data);
+        try {
+            setIsLoading(true);
+            const data = await getPeople();
+            setPeople(data);
+        } catch (error) {
+            console.error("Erro ao carregar pessoas:", error);
+            setPeople([]);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     //Função para filtrar a lista
@@ -27,13 +36,13 @@ export default function HomeScreen({ }) {
             setIsLoading(true);
             const data = await getPeople();
             const filtered = data.filter(person =>
-                (person.firstname.toLowerCase() || person.lastname.toLowerCase()).includes(searchText.toLowerCase())
+                `${person.firstname} ${person.lastname}`.toLowerCase().includes(searchText.toLowerCase())
             );
             setPeople(filtered);
         }
         catch (error) {
             console.error("Erro na filtragem de pessoas:", error);
-            setPeople([]); // Limpa a lista em caso de erro
+            setPeople([]); // Define lista vazia em caso de erro
         }
         finally {
             setIsLoading(false);
@@ -43,10 +52,9 @@ export default function HomeScreen({ }) {
     //Executa ao abrir a tela, carrega tudo na primeira renderização
     useEffect(() => {
         loadPeople();
-        filterPeople();
     }, []);
 
-     // Busca quando o texto muda (com debounce simples, ou seja com um tempo de inatividade)
+    // Busca quando o texto muda (com debounce simples, ou seja com um tempo de inatividade)
     useEffect(() => {
         // Aguarda 500ms após o usuário parar de digitar para executar a função de busca
         const delaySearch = setTimeout(() => {
@@ -67,18 +75,34 @@ export default function HomeScreen({ }) {
                 onPress={() => navigation.navigate("AddEditScreen")}
             />
 
-            <FlatList
-                data={people}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <CardPersonal
-                        item={item}
-                        navigation={navigation}
-                        refresh={loadPeople}
-                    />
-                )}
+            <TextInput
+                placeholder='Buscar pessoa...'
+                value={searchText}
+                onChangeText={setSearchText}
+                autoCapitalize='none'
+                autoCorrect={false}
             />
 
+            {isLoading ? (
+                <ActivityIndicator
+                    marginTop={80}
+                    size="large"
+                    color="#232c83"
+                    style={{ marginTop: 12, transform: [{ scale: 1.2 }] }}
+                />
+            ) : (
+                <FlatList
+                    data={people}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <CardPersonal
+                            item={item}
+                            navigation={navigation}
+                            refresh={loadPeople}
+                        />
+                    )}
+                />
+            )}
         </View>
     )
 }

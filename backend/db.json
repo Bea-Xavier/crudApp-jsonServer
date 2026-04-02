@@ -143,16 +143,16 @@
     {
       "id": "21",
       "firstname": "Vinicius",
-      "lastname": "Moura",
+      "lastname": "Mourinha",
       "email": "vinicius.moura@gmail.com",
       "phone": "(11) 91234-0021"
     },
     {
+      "id": "61b4",
       "firstname": "Beea",
       "lastname": "Xavier",
       "email": "divaLinda@gmail.com",
-      "phone": "(99) 99999-8888",
-      "id": "K2kdCkg4_h0"
+      "phone": "19 99888 - 7766"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
