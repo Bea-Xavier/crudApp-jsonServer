@@ -23,6 +23,7 @@ export default function HomeScreen({ }) {
             const data = await getPeople();
             setPeople(data);
         } catch (error) {
+            alert("Erro ao carregar pessoas. Verifique a conexão com a API.");
             console.error("Erro ao carregar pessoas:", error);
             setPeople([]);
         } finally {
@@ -41,6 +42,7 @@ export default function HomeScreen({ }) {
             setPeople(filtered);
         }
         catch (error) {
+            alert("Erro ao filtrar pessoas. Verifique a conexão com a API.");
             console.error("Erro na filtragem de pessoas:", error);
             setPeople([]); // Define lista vazia em caso de erro
         }
@@ -94,6 +96,11 @@ export default function HomeScreen({ }) {
                 <FlatList
                     data={people}
                     keyExtractor={(item) => item.id.toString()}
+                    ListEmptyComponent={
+                        <Text style={styles.emptyList}>
+                            Nenhuma pessoa encontrada
+                        </Text>
+                    }
                     renderItem={({ item }) => (
                         <CardPersonal
                             item={item}
