@@ -151,8 +151,15 @@
       "id": "61b4",
       "firstname": "Beea",
       "lastname": "Xavier",
-      "email": "divaLinda@gmail.com",
+      "email": "divaLindaPerfeita@gmail.com",
       "phone": "19 99888 - 7766"
+    },
+    {
+      "id": "d274",
+      "firstname": "Sara",
+      "lastname": "Lambari",
+      "email": "saraLambarih@yahoo.com",
+      "phone": "19 22233-6655"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

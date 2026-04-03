@@ -1,13 +1,12 @@
-import { FlatList, Text, Button, View, ActivityIndicator, TextInput } from 'react-native';
+import { FlatList, Text, View, ActivityIndicator, TextInput, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { CardPersonal } from '../components/CardPersonal';
-
-import { styles } from '../styles/styles';
-
+import { styles, NAVY, NEUTRAL } from '../styles/styles';
 import { getPeople } from '../servers/peopleCrud';
+import { UserPlus, Search } from 'lucide-react-native';
 
-export default function HomeScreen({ }) {
+export default function HomeScreen() {
     const navigation = useNavigation();
     //Lista
     const [people, setPeople] = useState([]);
@@ -31,22 +30,18 @@ export default function HomeScreen({ }) {
         }
     }
 
-    //Função para filtrar a lista
-    async function filterPeople(searchText) {
+    async function filterPeople(text) {
         try {
             setIsLoading(true);
             const data = await getPeople();
             const filtered = data.filter(person =>
-                `${person.firstname} ${person.lastname}`.toLowerCase().includes(searchText.toLowerCase())
+                `${person.firstname} ${person.lastname}`.toLowerCase().includes(text.toLowerCase())
             );
             setPeople(filtered);
-        }
-        catch (error) {
-            alert("Erro ao filtrar pessoas. Verifique a conexão com a API.");
-            console.error("Erro na filtragem de pessoas:", error);
-            setPeople([]); // Define lista vazia em caso de erro
-        }
-        finally {
+        } catch (error) {
+            alert("Erro ao filtrar pessoas.");
+            setPeople([]);
+        } finally {
             setIsLoading(false);
         }
     }
@@ -70,36 +65,63 @@ export default function HomeScreen({ }) {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>Pessoas</Text>
+            {/* Header */}
+            <View style={styles.headerBar}>
+                <View>
+                    <Text style={styles.title}>Pessoas</Text>
+                    <Text style={styles.subtitle}>Gerenciamento de contatos</Text>
+                </View>
+                {/* Badge com contagem */}
+                <View style={{ backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 6 }}>
+                    <Text style={{ color: '#fff', fontWeight: '700', fontSize: 16 }}>{people.length}</Text>
+                </View>
+            </View>
 
-            <Button
-                title="Adicionar Pessoa"
+            {/* Botão adicionar */}
+            <TouchableOpacity
+                style={styles.primaryButton}
                 onPress={() => navigation.navigate("AddEditScreen")}
-            />
+                activeOpacity={0.82}
+            >
+                <UserPlus size={18} color="#fff" />
+                <Text style={styles.primaryButtonText}>Adicionar Pessoa</Text>
+            </TouchableOpacity>
 
-            <TextInput
-                placeholder='Buscar pessoa...'
-                value={searchText}
-                onChangeText={setSearchText}
-                autoCapitalize='none'
-                autoCorrect={false}
-            />
+            {/* Busca */}
+            <View style={styles.searchWrapper}>
+                <Search size={16} color={NEUTRAL.slate} style={styles.searchIcon} />
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Buscar por nome..."
+                    placeholderTextColor={NEUTRAL.silver}
+                    value={searchText}
+                    onChangeText={setSearchText}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                />
+            </View>
 
+            {/* Label de seção */}
+            <Text style={styles.sectionLabel}>Contatos</Text>
+
+            {/* Lista */}
             {isLoading ? (
                 <ActivityIndicator
-                    marginTop={80}
                     size="large"
-                    color="#232c83"
-                    style={{ marginTop: 12, transform: [{ scale: 1.2 }] }}
+                    color={NAVY.core}
+                    style={{ marginTop: 60 }}
                 />
             ) : (
                 <FlatList
                     data={people}
                     keyExtractor={(item) => item.id.toString()}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 24 }}
                     ListEmptyComponent={
-                        <Text style={styles.emptyList}>
-                            Nenhuma pessoa encontrada
-                        </Text>
+                        <View>
+                            <Text style={styles.emptyList}>Nenhuma pessoa encontrada</Text>
+                            <Text style={styles.emptyListSub}>Tente buscar por outro nome</Text>
+                        </View>
                     }
                     renderItem={({ item }) => (
                         <CardPersonal
@@ -111,5 +133,5 @@ export default function HomeScreen({ }) {
                 />
             )}
         </View>
-    )
+    );
 }
