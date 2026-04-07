@@ -8,27 +8,6 @@
       "phone": "(11) 91234-6767"
     },
     {
-      "id": "2",
-      "firstname": "Maria",
-      "lastname": "Oliveira",
-      "email": "maria.oliveira@gmail.com",
-      "phone": "(11) 91234-0002"
-    },
-    {
-      "id": "3",
-      "firstname": "Pedro",
-      "lastname": "Santos",
-      "email": "pedro.santos@gmail.com",
-      "phone": "(11) 91234-0003"
-    },
-    {
-      "id": "4",
-      "firstname": "Ana",
-      "lastname": "Costa",
-      "email": "ana.costa@gmail.com",
-      "phone": "(11) 91234-0004"
-    },
-    {
       "id": "5",
       "firstname": "Lucas",
       "lastname": "Ferreira",
@@ -124,7 +103,7 @@
       "firstname": "Beatriz",
       "lastname": "Nunes",
       "email": "beatriz.nunes@gmail.com",
-      "phone": "(11) 91234-0018"
+      "phone": "(11) 91234-5589"
     },
     {
       "id": "19",
@@ -159,7 +138,35 @@
       "firstname": "Sara",
       "lastname": "Lambari",
       "email": "saraLambarih@yahoo.com",
-      "phone": "19 22233-6655"
+      "phone": "19 22233-4545"
+    },
+    {
+      "id": "cccd",
+      "firstname": "Gabriel",
+      "lastname": "Ziani",
+      "email": "ziane@yahoo.com",
+      "phone": "(09) 98987-6565"
+    },
+    {
+      "id": "6c08",
+      "firstname": "Maria",
+      "lastname": "Oliveira",
+      "email": "maria.oliveira@gmail.com",
+      "phone": "99 66666-5555"
+    },
+    {
+      "id": "c02a",
+      "firstname": "Rafael",
+      "lastname": "Cruz",
+      "email": "rafael.cruz@yahoo.com",
+      "phone": "99 66666-5555"
+    },
+    {
+      "id": "3fde",
+      "firstname": "Carlos",
+      "lastname": "Antonio",
+      "email": "carlinhos@yahoo.com",
+      "phone": "99 66666-4545"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
