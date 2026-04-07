@@ -159,6 +159,14 @@ Será gerado um **QR Code** no terminal. Abra o aplicativo **Expo Go** no seu ce
 
 ---
 
+## 📽️ Vídeo Expositivo do Projeto
+
+Link para a demonstração visual das funcionalidades da aplicação:
+
+https://drive.google.com/file/d/1dYo-D8s4LzPDyv0g-hQVFuavdEWqHgAQ/view?usp=drive_link
+
+---
+
 ## 📌 Considerações Finais
 
 - O backend utilizado é apenas para fins de **desenvolvimento e estudo**.
