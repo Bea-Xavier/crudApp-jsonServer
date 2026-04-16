@@ -163,7 +163,7 @@ Será gerado um **QR Code** no terminal. Abra o aplicativo **Expo Go** no seu ce
 
 Link para a demonstração visual das funcionalidades da aplicação:
 
-https://drive.google.com/file/d/1dYo-D8s4LzPDyv0g-hQVFuavdEWqHgAQ/view?usp=drive_link
+https://drive.google.com/file/d/1dYo-D8s4LzPDyv0g-hQVFuavdEWqHgAQ/view?usp=sharing
 
 ---
 
